@@ -37,6 +37,24 @@ function App() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        //user logged in
+        console.log(authUser);
+        setUser(authUser);
+      } else {
+        //user logged out
+        setUser(null);
+      }
+    })
+
+    return () => {
+      unsubscribe();
+    }
+  }, [user, username]);
 
   useEffect(() => {
     db.collection('posts').onSnapshot(snapshot => {
@@ -51,7 +69,12 @@ function App() {
     e.preventDefault();
 
     auth.createUserWithEmailAndPassword(email, password)
-      .catch((error) => alert(error.message))
+      .then((authUser) => {
+        return authUser.user.updateProfile({
+          displayName: username,
+        })
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
