@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Post from './post.js'
 
@@ -32,9 +32,6 @@ function App() {
         <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
       ))}
 
-      <Post username="chris" caption="wow it works" imageUrl="https://imagemagick.org/image/wizard.jpg" />
-      <Post username="heather" caption="sick" imageUrl="https://imagemagick.org/image/wizard.jpg" />
-      <Post username="manny" caption="wow it works" imageUrl="https://imagemagick.org/image/wizard.jpg" />
     </div>
   );
 }
