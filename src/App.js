@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import './App.css';
 import Post from './post.js'
-import { db } from './firebase.js';
+import { db, auth } from './firebase.js';
 import {makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal'
 import { Button, Input } from '@material-ui/core';
@@ -50,7 +50,9 @@ function App() {
   const signUp = (e) => {
     e.preventDefault();
 
-  }
+    auth.createUserWithEmailAndPassword(email, password)
+      .catch((error) => alert(error.message))
+  };
 
   return (
     <div className="App">
@@ -59,32 +61,34 @@ function App() {
         onClose={()=>setOpen(false)}
       >
         <div style={modalStyle} className={classes.paper}>
-          <center>
-            <img
-              className="app__headerImage"
-              src="http://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
-              alt=""
-            />
+          <form className="app__signup">
+            <center>
+              <img
+                className="app__headerImage"
+                src="http://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+                alt=""
+                />
+            </center>
             <Input
               placeholder="username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            />
+              />
             <Input
               placeholder="email"
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+              />
             <Input
               placeholder="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button onClick={signUp}>Sign Up</Button>
-          </center>
+              />
+            <Button type="submit" onClick={signUp}>Sign Up</Button>
+          </form>
         </div>
       </Modal>
       
