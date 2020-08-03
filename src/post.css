@@ -9,7 +9,6 @@
 .post__image {
     width: 100%;
     object-fit: contain;
-    border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
 }
 
@@ -21,7 +20,8 @@
 .post__header {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 16px;
+    border-bottom: 1px solid lightgray;
 }
 
 .post__commentBox {
@@ -38,7 +38,6 @@
 
 .post__comments {
     padding: 20px;
-    border-top: 1px solid lightgray;
 }
 
 .post__button {
@@ -51,4 +50,12 @@
 
 .post__avatar {
     margin-right: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .post {
+      border-left: none;
+      border-right: none;
+      margin-bottom: 25px;
+  }
 }
